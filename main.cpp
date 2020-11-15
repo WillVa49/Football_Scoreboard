@@ -96,8 +96,8 @@ do
 
   if (userChoice == "A" || userChoice == "a")
   {
-     cout << "Please enter a new name for the home team: ";
-  cin >> newName;
+    cout << "Please enter a new name for the home team: ";
+    cin >> newName;
   }
  
 
