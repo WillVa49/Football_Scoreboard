@@ -57,8 +57,8 @@ class Team2
     }
     void setName(string n) {Name = n;}
     void setCoachName(string c) {CoachName = c;}
-    void setVisitorCity (string hc) {visitorCity = hc;}
-    void setVisitorStatus (bool hs) {visitorStatus = hs;}
+    void setVisitorCity (string vc) {visitorCity = vc;}
+    void setVisitorStatus (bool vs) {visitorStatus = vs;}
     void setScore (int s) {score = s;}
     void setTimeoutCount (int t) {TimeoutCount = t;}
     string getName() const {return Name;}
@@ -91,10 +91,10 @@ class Scoreboard
       string color = "";
       string reset = "\x1b[0m";
       color = "\x1b[33;1m";
-      cout << color << "Football Scoreboard" << reset << endl;
+      cout << color << "\tFOOTBALL SCOREBOARD" << reset << endl;
       cout << home.getName() << "\t\t" << visitor.getName() << endl;
       cout << home.getScore() << "\t\t\t\t" << visitor.getScore() << endl;
-      cout << quarter << endl;
+      cout << color << "\t\tQTR" << reset << "  " << quarter << endl;
     }
 };
 
@@ -112,6 +112,7 @@ int main()
   int newQuarter = 0;
 
   tOne.setHomeStatus(true);
+  tTwo.setVisitorStatus(false);
 
   s.setHome(tOne);
   s.setVisitor(tTwo);
@@ -124,7 +125,7 @@ int main()
     cout << "B = Update Visitor Team name: " << endl;
     cout << "C = Home Team Score: " << endl;
     cout << "D = Visitor Team Score: " << endl;
-    cout << "F = Update Qtr: " << endl;
+    cout << "F = Update the Quarter they are in: " << endl;
     cout << "E = exit: ;" << endl;
     cin >> userChoice;
 
@@ -158,6 +159,7 @@ int main()
     {
       cout << "\nPlease enter what quarter they are in: " << endl;
       cin >> newQuarter;
+      s.setQuarter(newQuarter);
     }
     else if (userChoice == "E" || userChoice == "e")
     {
@@ -169,6 +171,7 @@ int main()
     }
 
     s.setHome(tOne);
+    s.setVisitor(tTwo);
   }while (userChoice != "E" && userChoice != "e");
   
   return 0;
