@@ -2,6 +2,9 @@
 // Dr_T   Programming Fundamentals II
 //C++ program that keeps track of various objects and variables in a Football Scoreboard
 #include <iostream>
+#include <iomanip>
+#include <stdlib.h>
+#include <unistd.h>
 using namespace std;
 
 class Team1
@@ -18,7 +21,7 @@ class Team1
     {
       Name = "DefaultName";
       CoachName = "Dr.T";
-      HomeCity = "DefaultHomeCity";
+      HomeCity = "Home City";
       HomeStatus = true; //Visitor = false, Home = True
       score = 0;
       TimeoutCount = 0;
@@ -50,7 +53,7 @@ class Team2
     {
       Name = "DefaultName";
       CoachName = "Dr.T";
-      visitorCity = "DefaultHomeCity";
+      visitorCity = "Visitor City";
       visitorStatus = false; //Visitor = false, Home = True
       score = 0;
       TimeoutCount = 0;
@@ -89,15 +92,38 @@ class Scoreboard
     void ShowScoreboard()
     {
       string color = "";
+      string color1 = "";
       string reset = "\x1b[0m";
-      color = "\x1b[33;1m";
+      color = "\x1b[32;4m";
+      color1 = "\x1b[39;1m";
       cout << color << "\tFOOTBALL SCOREBOARD" << reset << endl;
-      cout << home.getName() << "\t\t" << visitor.getName() << endl;
+      cout << color1 << home.getHomeCity() << "\t\t" << visitor.getVisitorCity() << reset << endl;
+      cout << color1 << home.getName() << "\t\t" << visitor.getName() << reset << endl;
       cout << home.getScore() << "\t\t\t\t" << visitor.getScore() << endl;
       cout << color << "\t\tQTR" << reset << "  " << quarter << endl;
     }
 };
 
+
+int minutes = 14;
+int seconds = 60;
+
+void timer()
+{
+while (true) 
+	{   
+    system("clear");
+    cout << setfill('0') << setw(2) << minutes << " : " <<setfill('0') << setw (2) << seconds << endl;
+
+		sleep(1); 
+		seconds--; 
+		if (seconds == 0) 
+		{ 
+			minutes--; 
+			seconds = 60; 
+		} 
+	} 
+}
 
 int main() 
 {
@@ -107,6 +133,7 @@ int main()
   Team1 tOne;
   Team2 tTwo;
   string newName = "";
+  string cityName = "";
   string userChoice = "";
   int newScore = 0;
   int newQuarter = 0;
@@ -121,26 +148,31 @@ int main()
   {
     system("clear");
     s.ShowScoreboard();
-    cout << "A = Update Home Team name: " << endl;
-    cout << "B = Update Visitor Team name: " << endl;
+    cout << "A = Update Home Team name and City: " << endl;
+    cout << "B = Update Visitor Team name and City: " << endl;
     cout << "C = Home Team Score: " << endl;
     cout << "D = Visitor Team Score: " << endl;
     cout << "F = Update the Quarter they are in: " << endl;
-    cout << "E = exit: ;" << endl;
+    cout << "E = Exit" << endl;
     cin >> userChoice;
 
     if (userChoice == "A" || userChoice == "a")
     {
-      cout << "\nPlease enter a new name for the home team: ";
-      cin >> newName;
+      cout << "\nPlease enter the city and new name for the home team : ";
+      cin >> cityName;
+      cin >> newName;  
       tOne.setName(newName);
+      tOne.setHomeCity(cityName);
       s.ShowScoreboard();
     }
     else if (userChoice == "B" || userChoice == "b")
     {
-      cout << "\nPlease enter a new name for the visitor team: " << endl;
+      cout << "\nPlease enter the city and new name for the visitor team: " << endl;
+      cin >> cityName;
       cin >> newName;
+      
       tTwo.setName(newName);
+      tTwo.setVisitorCity(cityName);
       s.ShowScoreboard();
     }
     else if (userChoice == "C" || userChoice == "c")
@@ -172,7 +204,11 @@ int main()
 
     s.setHome(tOne);
     s.setVisitor(tTwo);
+
   }while (userChoice != "E" && userChoice != "e");
-  
+
+  timer();
+
   return 0;
 }
+		
