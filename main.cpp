@@ -20,7 +20,7 @@ class Team1
     Team1()
     {
       Name = "DefaultName";
-      CoachName = "Dr.T";
+      CoachName = "Herbal T";
       HomeCity = "Home City";
       HomeStatus = true; //Visitor = false, Home = True
       score = 0;
@@ -52,7 +52,7 @@ class Team2
     Team2()
     {
       Name = "DefaultName";
-      CoachName = "Dr.T";
+      CoachName = "Green T";
       visitorCity = "Visitor City";
       visitorStatus = false; //Visitor = false, Home = True
       score = 0;
@@ -76,7 +76,7 @@ class Scoreboard
 {
   private:
     int quarter;
-    Team1 home;
+    Team1 home;  //Object that is a member of another object
     Team2 visitor;
   public:
     Scoreboard()
@@ -93,7 +93,7 @@ class Scoreboard
     {
       string color = "";
       string color1 = "";
-      string reset = "\x1b[0m";
+      string reset = "\x1b[0m";   //adding color
       color = "\x1b[32;4m";
       color1 = "\x1b[39;1m";
       cout << color << "\tFOOTBALL SCOREBOARD" << reset << endl;
@@ -104,22 +104,23 @@ class Scoreboard
     }
 };
 
-
+// Minutes and seconds for the timer
 int minutes = 14;
 int seconds = 60;
 
 void timer()
 {
+  //while(true) will make an infinite loop because the timer will keep counting 
 while (true) 
 	{   
     system("clear");
-    cout << setfill('0') << setw(2) << minutes << " : " <<setfill('0') << setw (2) << seconds << endl;
-
+    cout  << minutes << ":" << seconds << endl;
+    //waits 1 second
 		sleep(1); 
-		seconds--; 
+		seconds--; //decrease seconds
 		if (seconds == 0) 
 		{ 
-			minutes--; 
+			minutes--; //minute decreases
 			seconds = 60; 
 		} 
 	} 
@@ -137,13 +138,14 @@ int main()
   string userChoice = "";
   int newScore = 0;
   int newQuarter = 0;
+  //Setting home and visitor team
+  tOne.setHomeStatus(true); //tOne is the home team
+  tTwo.setVisitorStatus(false); //tTwo is the visitor team
 
-  tOne.setHomeStatus(true);
-  tTwo.setVisitorStatus(false);
-
+  //Add intial data to s
   s.setHome(tOne);
   s.setVisitor(tTwo);
-
+ 
   do
   {
     system("clear");
@@ -204,11 +206,9 @@ int main()
 
     s.setHome(tOne);
     s.setVisitor(tTwo);
-
   }while (userChoice != "E" && userChoice != "e");
 
   timer();
-
   return 0;
 }
 		
